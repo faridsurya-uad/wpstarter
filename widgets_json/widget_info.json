@@ -1,0 +1,37 @@
+{
+    "title" : "SHD Fullpage Info",
+    "id"    : "shd_fullpageinfo_widget",
+    "description" : "Display fullpage info block",
+    "form"  : [
+        {
+            "label" : "Title",
+            "id"    : "title",
+            "type"  : "text"
+        },
+        {
+            "label" : "Subtitle",
+            "id"    : "subtitle",
+            "type"  : "text"
+        },
+        {
+            "label" : "Description",
+            "id"    : "description",
+            "type"  : "textarea"
+        },
+        {
+            "label" : "Button Text",
+            "id"    : "btn_text",
+            "type"  : "text"
+        },
+        {
+            "label" : "Button URL",
+            "id"    : "btn_url",
+            "type"  : "text"
+        },
+        {
+            "label" : "Background Image",
+            "id"    : "bg_image",
+            "type"  : "image"
+        }
+    ]
+}
