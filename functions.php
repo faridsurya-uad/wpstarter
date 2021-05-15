@@ -182,34 +182,6 @@ function shd_wpstarter_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'shd_wpstarter_scripts' );
 
-
-/**
- * Implement the Custom Header feature.
- */
-require get_template_directory() . '/inc/custom-header.php';
-
-/**
- * Custom template tags for this theme.
- */
-require get_template_directory() . '/inc/template-tags.php';
-
-/**
- * Functions which enhance the theme by hooking into WordPress.
- */
-require get_template_directory() . '/inc/template-functions.php';
-
-/**
- * Customizer additions.
- */
-require get_template_directory() . '/inc/customizer.php';
-
-/**
- * Load Jetpack compatibility file.
- */
-if ( defined( 'JETPACK__VERSION' ) ) {
-	require get_template_directory() . '/inc/jetpack.php';
-}
-
 /**
  * Register Custom Navigation Walker
  */
@@ -224,11 +196,6 @@ add_action( 'after_setup_theme', 'register_navwalker' );
  */
 require get_template_directory() . '/template-customizer/home-customizer.php';
 require get_template_directory() . '/template-customizer/footer-customizer.php';
-
-/**
- * CUSTOM WIDGETS
- */
-require get_template_directory() . '/widgets/shd_feature_widget.php';
 ?>
 
 <?php require get_template_directory() . "/widgets/shd_fullpageinfo_widget.php"; ?>
