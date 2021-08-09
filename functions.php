@@ -189,13 +189,6 @@ function register_navwalker(){
 	require_once get_template_directory() . '/walker/class-wp-bootstrap-navwalker.php';
 }
 add_action( 'after_setup_theme', 'register_navwalker' );
-
-
-/**
- * TEMPLATE CUSTOMIZER
- */
-require get_template_directory() . '/template-customizer/home-customizer.php';
-require get_template_directory() . '/template-customizer/footer-customizer.php';
 ?>
 
-<?php require get_template_directory() . "/widgets/shd_fullpageinfo_widget.php"; ?>
+
