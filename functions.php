@@ -167,6 +167,14 @@ function shd_wpstarter_widgets_init() {
 }
 add_action( 'widgets_init', 'shd_wpstarter_widgets_init' );
 
+//ACTIVATE IMAGE UPLOADER ON WIDGET
+function admin_scripts()
+{
+	wp_enqueue_media();
+	wp_enqueue_script('ads_script', get_template_directory_uri() . '/js/widget_media_upload.js', false, '1.0.0', true);
+}
+add_action('admin_enqueue_scripts', 'admin_scripts');
+
 /**
  * Enqueue scripts and styles.
  */
@@ -184,11 +192,19 @@ add_action( 'wp_enqueue_scripts', 'shd_wpstarter_scripts' );
 
 /**
  * Register Custom Navigation Walker
- */
+*/
 function register_navwalker(){
 	require_once get_template_directory() . '/walker/class-wp-bootstrap-navwalker.php';
 }
 add_action( 'after_setup_theme', 'register_navwalker' );
+/**
+ * ALLOW TO UPLOAD SVG FILE 
+*/
+function cc_mime_types($mimes) {
+	$mimes['svg'] = 'image/svg+xml';
+	return $mimes;
+}
+add_filter('upload_mimes', 'cc_mime_types');
 ?>
 
 
