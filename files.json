@@ -14,6 +14,7 @@
 "walker/class-wp-bootstrap-navwalker.php",
 "js/customizer.js",
 "js/navigation.js",
+"js/widget_media_upload.js",
 "template-components/card-post.php",
 "template-components/block-header.php"
 ]
