@@ -606,3 +606,75 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) :
 	}
 
 endif;
+
+/**
+ * Register widget area.
+ *
+ * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
+ */
+function shd_wpstarter_widgets_init() {
+	register_sidebar(
+		array(
+			'name'          => esc_html__( 'Sidebar', 'shd-wpstarter' ),
+			'id'            => 'sidebar-1',
+			'description'   => esc_html__( 'Add widgets here.', 'shd-wpstarter' ),
+			'before_widget' => '<div class="py-3">',
+			'after_widget'  => '</div>',
+			'before_title'  => '<h5 class="widget-title">',
+			'after_title'   => '</h5>',
+		)
+	);
+    register_sidebar(
+		array(
+			'name'          => esc_html__( 'Home Before Posts', 'shd-wpstarter' ),
+			'id'            => 'home-before-posts',
+			'description'   => esc_html__( 'Add widgets here.', 'shd-wpstarter' ),
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+		)
+	);
+    register_sidebar(
+		array(
+			'name'          => esc_html__( 'Home After Posts', 'shd-wpstarter' ),
+			'id'            => 'home-after-posts',
+			'description'   => esc_html__( 'Add widgets here.', 'shd-wpstarter' ),
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+		)
+	);
+	register_sidebar(
+		array(
+			'name'          => esc_html__( 'Page: About', 'shd-wpstarter' ),
+			'id'            => 'page-about',
+			'description'   => esc_html__( 'Add widgets here.', 'shd-wpstarter' ),
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+		)
+	);
+	register_sidebar(
+		array(
+			'name'          => esc_html__( 'Page: Contact', 'shd-wpstarter' ),
+			'id'            => 'page-contact',
+			'description'   => esc_html__( 'Add widgets here.', 'shd-wpstarter' ),
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+		)
+	);
+}
+add_action( 'widgets_init', 'shd_wpstarter_widgets_init' );
+
+//ACTIVATE IMAGE UPLOADER ON WIDGET
+function admin_scripts()
+{
+	wp_enqueue_media();
+    wp_enqueue_script('ads_script', get_template_directory_uri() . '/js/widget_media_upload.js', false, '1.0.0', true);
+}
+add_action('admin_enqueue_scripts', 'admin_scripts');
