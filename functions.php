@@ -16,6 +16,10 @@
  * License: GPL-3.0+
  * License URI: http://www.gnu.org/licenses/gpl-3.0.txt
  */
+if ( ! defined( '_S_VERSION' ) ) {
+	// Replace the version number of the theme on each release.
+	define( '_S_VERSION', '1.0.0' );
+}
 
 // Check if Class Exists.
 if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) :
@@ -607,6 +611,64 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) :
 
 endif;
 
+/*
+* Enable support for Post Thumbnails on posts and pages.
+*
+* @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
+*/
+add_theme_support( 'post-thumbnails' );
+
+// This theme uses wp_nav_menu() in one location.
+register_nav_menus(
+	array(
+		'navbar' => esc_html__( 'Primary', 'shd-wpstarter' ),
+	)
+);
+register_nav_menus(
+	array(
+		'footer-1' => esc_html__( 'Footer 1', 'shd-wpstarter' ),
+	)
+);
+register_nav_menus(
+	array(
+		'cta-navbar' => esc_html__( 'CTA Navbar', 'shd-wpstarter' ),
+	)
+);
+
+/*
+	* Switch default core markup for search form, comment form, and comments
+	* to output valid HTML5.
+	*/
+add_theme_support(
+	'html5',
+	array(
+		'search-form',
+		'comment-form',
+		'comment-list',
+		'gallery',
+		'caption',
+		'style',
+		'script',
+	)
+);
+// Add theme support for selective refresh for widgets.
+add_theme_support( 'customize-selective-refresh-widgets' );
+
+/**
+ * Add support for core custom logo.
+ *
+ * @link https://codex.wordpress.org/Theme_Logo
+ */
+add_theme_support(
+	'custom-logo',
+	array(
+		'height'      => 250,
+		'width'       => 250,
+		'flex-width'  => true,
+		'flex-height' => true,
+	)
+);
+
 /**
  * Register widget area.
  *
@@ -678,3 +740,84 @@ function admin_scripts()
     wp_enqueue_script('ads_script', get_template_directory_uri() . '/js/widget_media_upload.js', false, '1.0.0', true);
 }
 add_action('admin_enqueue_scripts', 'admin_scripts');
+
+
+
+/**
+ * Enqueue scripts and styles.
+ */
+function shd_wpstarter_scripts() {
+	wp_enqueue_style( 'shd-wpstarter-style', get_stylesheet_uri(), array(), _S_VERSION );
+	wp_style_add_data( 'shd-wpstarter-style', 'rtl', 'replace' );
+	wp_enqueue_script( 'shd-wpstarter-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
+	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
+		wp_enqueue_script( 'comment-reply' );
+	}
+}
+add_action( 'wp_enqueue_scripts', 'shd_wpstarter_scripts' );
+
+/**
+ * Register Custom Navigation Walker
+ */
+function register_navwalker(){
+	require_once get_template_directory() . '/walker/class-wp-bootstrap-navwalker.php';
+}
+add_action( 'after_setup_theme', 'register_navwalker' );
+
+/**
+ * ALLOW TO UPLOAD SVG FILE 
+ */
+
+function cc_mime_types($mimes) {
+	$mimes['svg'] = 'image/svg+xml';
+	$mimes['pdf'] = 'application/pdf';
+	return $mimes;
+}
+add_filter('upload_mimes', 'cc_mime_types');
+
+?>
+
+
+<?php
+function meta_box_contact()
+{
+	global $post; 
+	if(!empty($post))
+    {
+        $pageTemplate = get_post_meta($post->ID, '_wp_page_template', true);
+
+        if($pageTemplate == 'page-contact.php' )
+        {
+			add_meta_box( 'contact-meta-box', // ID attribute of metabox
+			'Map Embed',       // Title of metabox visible to user
+			'meta_box_contact_callback', // Function that prints box in wp-admin
+			'page',              // Show box for posts, pages, custom, etc.
+			'normal',            // Where on the page to show the box
+			'high' );            // Priority of box in display order
+        }
+    }                           
+   
+}
+add_action( "add_meta_boxes", "meta_box_contact" );
+function meta_box_contact_callback($post)
+{
+	$map = get_post_meta($post->ID, "map", true);
+	?>
+	<p>	
+	<input class="widefat" type="text" name="map" value="<?php echo $map;?>">
+	</p>
+	<?php
+}
+function map_metabox_save_meta_box( $post_id ) {
+	if(isset($_POST["map"]))
+	{
+		update_post_meta($post_id, "map", $_POST["map"]);
+	}	
+}
+add_action( "save_post", "map_metabox_save_meta_box" );
+?>
+
+<?php require get_template_directory() . "/template-customizer/home-customizer.php"; ?>
+<?php require get_template_directory() . "/template-customizer/post-template.php"; ?>
+<?php require get_template_directory() . "/template-customizer/background_pictures.php"; ?>
+<?php require get_template_directory() . "/template-customizer/footer-customizer.php"; ?>
