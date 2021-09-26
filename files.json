@@ -11,6 +11,7 @@
 "vendors/bootstrap/css/bootstrap.css",
 "vendors/bootstrap/js/bootstrap.bundle.js",
 "vendors/jquery/jquery.js",
+"template-customizer/home-customizer.php",
 "walker/class-wp-bootstrap-navwalker.php",
 "js/customizer.js",
 "js/navigation.js",
