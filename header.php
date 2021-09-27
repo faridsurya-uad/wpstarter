@@ -27,16 +27,13 @@ if(is_home())
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta property="og:url" content="<?php echo $og_url;?>" />
-  <meta property="og:type" content="<?php echo $og_type;?>" />
-  <meta property="og:title" content="<?php echo $og_title;?>" />
-  <meta property="og:description" content="<?php echo $og_desc;?>" />
-  <meta property="og:image" content="<?php echo $og_thumb;?>" />
-  <link rel="icon" href="<?php echo $custom_logo_url;?>" type="image/gif" sizes="16x16">
-
-
-	<link href="<?php echo get_template_directory_uri().'/vendors/bootstrap/css/bootstrap.min.css'; ?>" rel="stylesheet">
-   
+	<meta property="og:url" content="<?php echo $og_url;?>" />
+	<meta property="og:type" content="<?php echo $og_type;?>" />
+	<meta property="og:title" content="<?php echo $og_title;?>" />
+	<meta property="og:description" content="<?php echo $og_desc;?>" />
+	<meta property="og:image" content="<?php echo $og_thumb;?>" />
+ 	<link rel="icon" href="<?php echo $custom_logo_url;?>" type="image/gif" sizes="16x16">
+	<link href="<?php echo get_template_directory_uri().'/vendors/bootstrap/css/bootstrap.css'; ?>" rel="stylesheet">   
     <?php wp_head(); ?>
 </head>
 
@@ -44,14 +41,14 @@ if(is_home())
 <?php wp_body_open(); ?>
 
 <nav class="navbar navbar-light bg-light navbar-expand-lg border-bottom" id="mynav">
-  <div class="container">
-  <a class="navbar-brand" href="<?php echo get_home_url();?>">
-  <img src="<?php echo $custom_logo_url;?>" style="width: 50px;">
-  </a>
+	<div class="container">
+		<a class="navbar-brand" href="<?php echo get_home_url();?>">
+		<img src="<?php echo $custom_logo_url;?>" style="width: 50px;">
+		</a>
 
-    <button class="navbar-toggler me-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <i class="fa fa-bars" style="color: white;"></i>
-    </button>
+		<button class="navbar-toggler me-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<i class="fa fa-bars" style="color: white;"></i>
+		</button>
       
     <?php
   wp_nav_menu( array(
